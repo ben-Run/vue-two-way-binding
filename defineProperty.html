@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="black" name="apple-mobile-web-app-status-bar-style">
+        <meta content="telephone=no,email=no" name="format-detection">
+        <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>使用 defineProperty</title>
+        <link rel="stylesheet" href="./myCss.css">
+    </head>
+    <body>
+    <div>
+        <h3>20180628</h3>
+        <div class="inputBox">
+            <input type="text" id="txtInput" placeholder="输入任何值">
+            <br>
+            <p  id="txtdesc"></p>
+            <input type="button" value="改变值" id="btnChangP">        
+        </div>
+    </div>
+    
+    <script>
+    // defineProperty demo
+    let _value =32
+    let o=Object.create(null)
+    Object.defineProperty(o,'name',{
+        get:function(){
+            return _value
+        },
+        set :function(newValue){
+            if(typeof newValue === 'string'){
+                alert(newValue) 
+            }else {
+                _value=newValue
+            }
+        },
+        enumerable : true, //可枚举
+        configurable : true // 是否可以改变
+    });
+    console.log(o.name)
+    o.name=100
+    console.log(o.name)
+    
+    // 最简单的双向绑定
+    let tempObj=Object.create(null)
+    let inputTxt=document.getElementById('txtInput');
+    let txtdesc= document.getElementById('txtdesc');
+    let btnChangP= document.getElementById('btnChangP');
+
+    function eventInit(){
+        inputTxt.addEventListener('input',function(e){
+        //inputTxt.innerText=e.target.value\
+        tempObj.txtValue =e.target.value
+     },false)
+
+     btnChangP.addEventListener('click',function(e){
+        tempObj.txtValue='这是点击按钮改变的值!!!'
+     },false)
+    }
+    eventInit()
+    Object.defineProperty(tempObj,'txtValue',{
+        configurable:true,
+        set:function(newTxt){
+            inputTxt.value=newTxt
+            txtdesc.innerText=newTxt
+        }
+    })
+    </script>
+    </body>
+</html>
