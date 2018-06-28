@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Title</title>
+</head>
+<body>
+    <script src="./js/Observer.js"> </script>
+    <script>
+        // text
+        var data = {name: 'joel',age:{age1:12}}
+        observer(data)
+        data.name = 'newjoel' // 控制台打印出  已经监听到值的变化了，joel ==> newjoel
+        data.age.age1=15
+      </script>
+</body>
+</html>
