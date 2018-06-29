@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
@@ -9,15 +10,51 @@
     <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Page Title</title>
+    <link rel="stylesheet" href="myCss.css">
+    <style>
+        #app {
+            background-color: white;
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
-    <script src="./js/Observer.js"> </script>
-    <script>
-        // text
-        var data = {name: 'joel',age:{age1:12}}
-        observer(data)
-        data.name = 'newjoel' // 控制台打印出  已经监听到值的变化了，joel ==> newjoel
-        data.age.age1=15
-      </script>
+    <div id="app">
+        <div class="contentBox">
+            <h3>{{pageTitle}}</h3>
+            <input type="text" v-model="name" class="txtInput" placeholder="请输入值">
+            <h3>{{name}}</h3>
+            <p style="color:red">下面是按钮点击变化内容</p>
+            <h3>{{pageTitle}}</h3>
+        </div>
+        <button v-on:click="btnClick">btn click !</button>
+    </div>
+    <script src="./js/Observer.js"></script>
+    <script src="./js/Dependency.js"></script>
+    <script src="./js/Watcher.js"></script>
+    <script src="./js/Compile.js"></script>
+    <script src="./js/Index.js"></script>
+    <script type="text/javascript">
+        new MyfVue({
+            el: '#app',
+            data: {
+                pageTitle: 'hello world',
+                name: 'joel'
+            },
+            methods: {
+                btnClick: function () {
+                    this.pageTitle += 1
+                }
+            },
+            mounted: function () {
+                window.setTimeout(() => {
+                    this.pageTitle = 'hello word joel';
+                }, 1000);
+            }
+        });
+    </script>
+
 </body>
+
 </html>
